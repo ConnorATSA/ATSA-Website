@@ -1,0 +1,1045 @@
+/* =====================================================================
+   ATSA Design System — global entry point
+   Consumers link this one file. It is an @import manifest only.
+   ===================================================================== */
+
+/* ATSA webfonts — self-hosted Montserrat (headings) + Open Sans (body)
+   Latin + Latin-Ext subsets only. Source: Google Fonts (open-licensed). */
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/1aa673ad-39d9-4d48-912f-79b3b4a38df8.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/6f268dc4-7a4c-4c89-8da8-8519c56832d3.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/f2e905d6-9b8c-4ab7-b462-ef7dd1b25b94.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/dfef6a99-8c55-4e3b-a55d-06a9b875253a.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/3e04244b-0846-46ca-b6e7-a0ac371b1171.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/a7e9c1bc-ecc3-4dca-93b8-e67f917ebe58.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/d6eb0d97-275a-4358-a29d-bf74668bdcf9.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/75fe0912-2df5-4b1f-bf41-8a5deb4fc634.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/eaa95b63-eda8-4301-a6ed-ba73af0f8208.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/2c021448-5125-4fc0-bf99-4976c323abde.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/3120125b-7e21-4c9e-9fd6-b3283a41a3ab.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/d7a80a4f-1820-4f88-97fd-dfa4385c1b2f.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/39d2563b-f5d8-428e-a556-ec728747d40b.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/91078023-6a5f-4608-b41f-0031c2a93d7e.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =====================================================================
+   ATSA · Colour tokens
+   Water-led palette. Deep Navy anchors; Ocean, Aqua & Teal bring
+   movement. Neutrals let the brand colours breathe.
+   ===================================================================== */
+
+:root {
+  /* ---- Core brand (100%) ---- */
+  --atsa-navy:   #0B3B5E;  /* Deep Navy — primary, text, backgrounds        */
+  --atsa-ocean:  #1C6FB5;  /* Ocean — secondary, links, sub-headings        */
+  --atsa-aqua:   #36B6E0;  /* Aqua — accent, highlights, waves              */
+  --atsa-teal:   #16BFA6;  /* Teal — accent, energy, the 'A'                */
+
+  /* ---- Navy tints (mix toward white) ---- */
+  --atsa-navy-80: #3C627E;
+  --atsa-navy-60: #6D899E;
+  --atsa-navy-40: #9DB1BF;
+  --atsa-navy-20: #CED8DF;
+
+  /* ---- Ocean tints ---- */
+  --atsa-ocean-80: #498CC4;
+  --atsa-ocean-60: #77A9D3;
+  --atsa-ocean-40: #A4C5E1;
+  --atsa-ocean-20: #D2E2F0;
+
+  /* ---- Aqua tints ---- */
+  --atsa-aqua-80: #5EC5E6;
+  --atsa-aqua-60: #86D3EC;
+  --atsa-aqua-40: #AFE2F3;
+  --atsa-aqua-20: #D7F0F9;
+
+  /* ---- Teal tints ---- */
+  --atsa-teal-80: #45CCB8;
+  --atsa-teal-60: #73D9CA;
+  --atsa-teal-40: #A2E6DB;
+  --atsa-teal-20: #D0F2ED;
+
+  /* ---- Deeper navy (for dark surfaces / hovers; mix toward black) ---- */
+  --atsa-navy-deep: #072B45;
+  --atsa-navy-ink:  #052033;
+
+  /* ---- Neutrals ---- */
+  --atsa-sand:   #EDE6D8;  /* Warm background        */
+  --atsa-cloud:  #F2F8FC;  /* Light surface          */
+  --atsa-slate:  #5B6B7A;  /* Muted / secondary text */
+  --atsa-white:  #FFFFFF;
+
+  --atsa-cloud-deep: #E4EFF7; /* slightly deeper cloud for borders/fills */
+  --atsa-sand-deep:  #E1D6C2;
+  --atsa-slate-40:   #AEB7BF;
+  --atsa-slate-20:   #DDE2E6;
+
+  /* ---- Functional / status (harmonised, used sparingly) ---- */
+  --atsa-success:    #1F9D74;
+  --atsa-success-bg: #E4F4ED;
+  --atsa-warning:    #C9892B;
+  --atsa-warning-bg: #FAF0DC;
+  --atsa-danger:     #CF4B38;
+  --atsa-danger-bg:  #FBE9E5;
+  --atsa-info:       var(--atsa-ocean);
+  --atsa-info-bg:    var(--atsa-ocean-20);
+
+  /* =================================================================
+     Semantic aliases — reference these in components, not raw colours
+     ================================================================= */
+
+  /* Text */
+  --text-primary:   var(--atsa-navy);
+  --text-secondary: var(--atsa-slate);
+  --text-muted:     var(--atsa-navy-60);
+  --text-link:      var(--atsa-ocean);
+  --text-inverse:   var(--atsa-white);
+  --text-on-navy:   #DCEAF4;
+  --text-accent:    var(--atsa-teal);
+
+  /* Surfaces */
+  --surface-page:    var(--atsa-white);
+  --surface-card:    var(--atsa-white);
+  --surface-muted:   var(--atsa-cloud);
+  --surface-warm:    var(--atsa-sand);
+  --surface-navy:    var(--atsa-navy);
+  --surface-navy-deep: var(--atsa-navy-deep);
+  --surface-sunken:  var(--atsa-cloud);
+
+  /* Borders */
+  --border-subtle: #E6EDF2;
+  --border-default: #D6E0E8;
+  --border-strong:  var(--atsa-navy-40);
+  --border-navy:    rgba(255, 255, 255, 0.16);
+
+  /* Brand shortcuts */
+  --brand-primary: var(--atsa-navy);
+  --brand-ocean:   var(--atsa-ocean);
+  --brand-aqua:    var(--atsa-aqua);
+  --brand-accent:  var(--atsa-teal);
+
+  /* Focus ring */
+  --focus-ring: var(--atsa-aqua);
+}
+
+/* =====================================================================
+   ATSA · Typography tokens
+   Montserrat carries the brand voice (geometric, confident) and matches
+   the wordmark. Open Sans handles body copy — readable at length.
+   ===================================================================== */
+
+:root {
+  /* ---- Families ---- */
+  --font-heading: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body:    'Open Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:    'SFMono-Regular', ui-monospace, 'Menlo', 'Consolas', monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Type scale (1.250 major-third-ish, tuned) ---- */
+  --fs-display:  3.5rem;   /* 56px — hero display            */
+  --fs-h1:       2.5rem;   /* 40px                            */
+  --fs-h2:       1.875rem; /* 30px — section                  */
+  --fs-h3:       1.375rem; /* 22px — sub                      */
+  --fs-h4:       1.125rem; /* 18px                            */
+  --fs-lg:       1.125rem; /* 18px — lead body                */
+  --fs-body:     1rem;     /* 16px — default body             */
+  --fs-sm:       0.875rem; /* 14px                            */
+  --fs-xs:       0.75rem;  /* 12px — captions                 */
+  --fs-label:    0.6875rem;/* 11px — eyebrow / overline       */
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.1; /* @kind font */
+  --lh-snug:    1.25; /* @kind font */
+  --lh-heading: 1.2; /* @kind font */
+  --lh-body:    1.6; /* @kind font */
+  --lh-relaxed: 1.75; /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:   -0.02em; /* @kind font */
+  --ls-normal:  0; /* @kind font */
+  --ls-wide:    0.04em; /* @kind font */
+  --ls-label:   0.16em;   /* @kind font */
+}
+
+/* ---------------------------------------------------------------------
+   Base element defaults — opt-in via .atsa-prose or applied to body in
+   a consuming page. Components set their own type explicitly.
+   --------------------------------------------------------------------- */
+:where(body) {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.atsa-display,
+.atsa-h1, .atsa-h2, .atsa-h3, .atsa-h4 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+.atsa-display { font-size: var(--fs-display); font-weight: var(--fw-bold); }
+.atsa-h1 { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+.atsa-h2 { font-size: var(--fs-h2); font-weight: var(--fw-semibold); }
+.atsa-h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+.atsa-h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+
+.atsa-lead {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* Eyebrow / overline — letterspaced uppercase, echoes the wordmark caption */
+.atsa-eyebrow {
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-link);
+}
+
+/* =====================================================================
+   ATSA · Spacing, radius, shadow, borders, motion, layout
+   ===================================================================== */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4  */
+  --space-2:  0.5rem;   /* 8  */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  2.5rem;   /* 40 */
+  --space-8:  3rem;     /* 48 */
+  --space-9:  4rem;     /* 64 */
+  --space-10: 5rem;     /* 80 */
+  --space-11: 6rem;     /* 96 */
+  --space-12: 8rem;     /* 128 */
+
+  /* ---- Radius ----
+     The brand icon uses a generous, friendly corner (120/512 ≈ 0.23).
+     Components echo that softness without going fully pill on cards. */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+  --radius-card: var(--radius-lg);
+
+  /* ---- Border widths ---- */
+  --border-thin:   1px;
+  --border-medium: 1.5px;
+  --border-thick:  2px;
+
+  /* ---- Shadows ----
+     Soft, cool-tinted (navy-based) — never hard black. Calm, not flashy. */
+  --shadow-xs:  0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-sm:  0 1px 3px rgba(11, 59, 94, 0.08), 0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-md:  0 4px 12px rgba(11, 59, 94, 0.10), 0 2px 4px rgba(11, 59, 94, 0.06);
+  --shadow-lg:  0 12px 28px rgba(11, 59, 94, 0.12), 0 4px 10px rgba(11, 59, 94, 0.07);
+  --shadow-xl:  0 24px 48px rgba(11, 59, 94, 0.16), 0 8px 16px rgba(11, 59, 94, 0.08);
+  /* Coloured glow for accent / focus emphasis */
+  --shadow-aqua: 0 8px 24px rgba(54, 182, 224, 0.28);
+  --shadow-teal: 0 8px 24px rgba(22, 191, 166, 0.26);
+
+  /* Focus ring (paired with --focus-ring colour token) */
+  --ring-width: 3px; /* @kind other */
+  --ring-offset: 2px; /* @kind other */
+
+  /* ---- Motion ----
+     Calm, water-like easing. Quick on hover, gentle on entrance.
+     No bounces; no infinite decorative loops on content. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   320ms; /* @kind other */
+  --dur-slower: 560ms; /* @kind other */
+
+  /* ---- Layout ---- */
+  --container-sm:  640px;
+  --container-md:  840px;
+  --container-lg:  1120px;
+  --container-xl:  1280px;
+  --container-page: 1200px;
+  --gutter: var(--space-5);
+
+  /* ---- Z-index ---- */
+  --z-base:    1; /* @kind other */
+  --z-sticky:  100; /* @kind other */
+  --z-overlay: 1000; /* @kind other */
+  --z-modal:   1100; /* @kind other */
+  --z-toast:   1200; /* @kind other */
+}
+
+
+
+
+  html, body { margin: 0; background: var(--surface-page); }
+  body { font-family: var(--font-body); color: var(--text-primary); }
+  * { box-sizing: border-box; }
+  .atsa-modal-overlay { position: fixed; inset: 0; background: rgba(11,59,94,0.5); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; z-index: 1100; padding: 24px; animation: fade .2s ease; }
+  @keyframes fade { from { opacity: 0; } }
+  .atsa-modal { width: 100%; max-width: 440px; animation: pop .28s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes pop { from { opacity: 0; transform: translateY(12px); } }
+
+
+/* ===== challenge app shell ===== */
+/* =====================================================================
+   ATSA Design System — global entry point
+   Consumers link this one file. It is an @import manifest only.
+   ===================================================================== */
+
+/* ATSA webfonts — self-hosted Montserrat (headings) + Open Sans (body)
+   Latin + Latin-Ext subsets only. Source: Google Fonts (open-licensed). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================================
+   ATSA · Colour tokens
+   Water-led palette. Deep Navy anchors; Ocean, Aqua & Teal bring
+   movement. Neutrals let the brand colours breathe.
+   ===================================================================== */
+
+:root {
+  /* ---- Core brand (100%) ---- */
+  --atsa-navy:   #0B3B5E;  /* Deep Navy — primary, text, backgrounds        */
+  --atsa-ocean:  #1C6FB5;  /* Ocean — secondary, links, sub-headings        */
+  --atsa-aqua:   #36B6E0;  /* Aqua — accent, highlights, waves              */
+  --atsa-teal:   #16BFA6;  /* Teal — accent, energy, the 'A'                */
+
+  /* ---- Navy tints (mix toward white) ---- */
+  --atsa-navy-80: #3C627E;
+  --atsa-navy-60: #6D899E;
+  --atsa-navy-40: #9DB1BF;
+  --atsa-navy-20: #CED8DF;
+
+  /* ---- Ocean tints ---- */
+  --atsa-ocean-80: #498CC4;
+  --atsa-ocean-60: #77A9D3;
+  --atsa-ocean-40: #A4C5E1;
+  --atsa-ocean-20: #D2E2F0;
+
+  /* ---- Aqua tints ---- */
+  --atsa-aqua-80: #5EC5E6;
+  --atsa-aqua-60: #86D3EC;
+  --atsa-aqua-40: #AFE2F3;
+  --atsa-aqua-20: #D7F0F9;
+
+  /* ---- Teal tints ---- */
+  --atsa-teal-80: #45CCB8;
+  --atsa-teal-60: #73D9CA;
+  --atsa-teal-40: #A2E6DB;
+  --atsa-teal-20: #D0F2ED;
+
+  /* ---- Deeper navy (for dark surfaces / hovers; mix toward black) ---- */
+  --atsa-navy-deep: #072B45;
+  --atsa-navy-ink:  #052033;
+
+  /* ---- Neutrals ---- */
+  --atsa-sand:   #EDE6D8;  /* Warm background        */
+  --atsa-cloud:  #F2F8FC;  /* Light surface          */
+  --atsa-slate:  #5B6B7A;  /* Muted / secondary text */
+  --atsa-white:  #FFFFFF;
+
+  --atsa-cloud-deep: #E4EFF7; /* slightly deeper cloud for borders/fills */
+  --atsa-sand-deep:  #E1D6C2;
+  --atsa-slate-40:   #AEB7BF;
+  --atsa-slate-20:   #DDE2E6;
+
+  /* ---- Functional / status (harmonised, used sparingly) ---- */
+  --atsa-success:    #1F9D74;
+  --atsa-success-bg: #E4F4ED;
+  --atsa-warning:    #C9892B;
+  --atsa-warning-bg: #FAF0DC;
+  --atsa-danger:     #CF4B38;
+  --atsa-danger-bg:  #FBE9E5;
+  --atsa-info:       var(--atsa-ocean);
+  --atsa-info-bg:    var(--atsa-ocean-20);
+
+  /* =================================================================
+     Semantic aliases — reference these in components, not raw colours
+     ================================================================= */
+
+  /* Text */
+  --text-primary:   var(--atsa-navy);
+  --text-secondary: var(--atsa-slate);
+  --text-muted:     var(--atsa-navy-60);
+  --text-link:      var(--atsa-ocean);
+  --text-inverse:   var(--atsa-white);
+  --text-on-navy:   #DCEAF4;
+  --text-accent:    var(--atsa-teal);
+
+  /* Surfaces */
+  --surface-page:    var(--atsa-white);
+  --surface-card:    var(--atsa-white);
+  --surface-muted:   var(--atsa-cloud);
+  --surface-warm:    var(--atsa-sand);
+  --surface-navy:    var(--atsa-navy);
+  --surface-navy-deep: var(--atsa-navy-deep);
+  --surface-sunken:  var(--atsa-cloud);
+
+  /* Borders */
+  --border-subtle: #E6EDF2;
+  --border-default: #D6E0E8;
+  --border-strong:  var(--atsa-navy-40);
+  --border-navy:    rgba(255, 255, 255, 0.16);
+
+  /* Brand shortcuts */
+  --brand-primary: var(--atsa-navy);
+  --brand-ocean:   var(--atsa-ocean);
+  --brand-aqua:    var(--atsa-aqua);
+  --brand-accent:  var(--atsa-teal);
+
+  /* Focus ring */
+  --focus-ring: var(--atsa-aqua);
+}
+
+/* =====================================================================
+   ATSA · Typography tokens
+   Montserrat carries the brand voice (geometric, confident) and matches
+   the wordmark. Open Sans handles body copy — readable at length.
+   ===================================================================== */
+
+:root {
+  /* ---- Families ---- */
+  --font-heading: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body:    'Open Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:    'SFMono-Regular', ui-monospace, 'Menlo', 'Consolas', monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Type scale (1.250 major-third-ish, tuned) ---- */
+  --fs-display:  3.5rem;   /* 56px — hero display            */
+  --fs-h1:       2.5rem;   /* 40px                            */
+  --fs-h2:       1.875rem; /* 30px — section                  */
+  --fs-h3:       1.375rem; /* 22px — sub                      */
+  --fs-h4:       1.125rem; /* 18px                            */
+  --fs-lg:       1.125rem; /* 18px — lead body                */
+  --fs-body:     1rem;     /* 16px — default body             */
+  --fs-sm:       0.875rem; /* 14px                            */
+  --fs-xs:       0.75rem;  /* 12px — captions                 */
+  --fs-label:    0.6875rem;/* 11px — eyebrow / overline       */
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.1; /* @kind font */
+  --lh-snug:    1.25; /* @kind font */
+  --lh-heading: 1.2; /* @kind font */
+  --lh-body:    1.6; /* @kind font */
+  --lh-relaxed: 1.75; /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:   -0.02em; /* @kind font */
+  --ls-normal:  0; /* @kind font */
+  --ls-wide:    0.04em; /* @kind font */
+  --ls-label:   0.16em;   /* @kind font */
+}
+
+/* ---------------------------------------------------------------------
+   Base element defaults — opt-in via .atsa-prose or applied to body in
+   a consuming page. Components set their own type explicitly.
+   --------------------------------------------------------------------- */
+:where(body) {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.atsa-display,
+.atsa-h1, .atsa-h2, .atsa-h3, .atsa-h4 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+.atsa-display { font-size: var(--fs-display); font-weight: var(--fw-bold); }
+.atsa-h1 { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+.atsa-h2 { font-size: var(--fs-h2); font-weight: var(--fw-semibold); }
+.atsa-h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+.atsa-h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+
+.atsa-lead {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* Eyebrow / overline — letterspaced uppercase, echoes the wordmark caption */
+.atsa-eyebrow {
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-link);
+}
+
+/* =====================================================================
+   ATSA · Spacing, radius, shadow, borders, motion, layout
+   ===================================================================== */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4  */
+  --space-2:  0.5rem;   /* 8  */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  2.5rem;   /* 40 */
+  --space-8:  3rem;     /* 48 */
+  --space-9:  4rem;     /* 64 */
+  --space-10: 5rem;     /* 80 */
+  --space-11: 6rem;     /* 96 */
+  --space-12: 8rem;     /* 128 */
+
+  /* ---- Radius ----
+     The brand icon uses a generous, friendly corner (120/512 ≈ 0.23).
+     Components echo that softness without going fully pill on cards. */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+  --radius-card: var(--radius-lg);
+
+  /* ---- Border widths ---- */
+  --border-thin:   1px;
+  --border-medium: 1.5px;
+  --border-thick:  2px;
+
+  /* ---- Shadows ----
+     Soft, cool-tinted (navy-based) — never hard black. Calm, not flashy. */
+  --shadow-xs:  0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-sm:  0 1px 3px rgba(11, 59, 94, 0.08), 0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-md:  0 4px 12px rgba(11, 59, 94, 0.10), 0 2px 4px rgba(11, 59, 94, 0.06);
+  --shadow-lg:  0 12px 28px rgba(11, 59, 94, 0.12), 0 4px 10px rgba(11, 59, 94, 0.07);
+  --shadow-xl:  0 24px 48px rgba(11, 59, 94, 0.16), 0 8px 16px rgba(11, 59, 94, 0.08);
+  /* Coloured glow for accent / focus emphasis */
+  --shadow-aqua: 0 8px 24px rgba(54, 182, 224, 0.28);
+  --shadow-teal: 0 8px 24px rgba(22, 191, 166, 0.26);
+
+  /* Focus ring (paired with --focus-ring colour token) */
+  --ring-width: 3px; /* @kind other */
+  --ring-offset: 2px; /* @kind other */
+
+  /* ---- Motion ----
+     Calm, water-like easing. Quick on hover, gentle on entrance.
+     No bounces; no infinite decorative loops on content. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   320ms; /* @kind other */
+  --dur-slower: 560ms; /* @kind other */
+
+  /* ---- Layout ---- */
+  --container-sm:  640px;
+  --container-md:  840px;
+  --container-lg:  1120px;
+  --container-xl:  1280px;
+  --container-page: 1200px;
+  --gutter: var(--space-5);
+
+  /* ---- Z-index ---- */
+  --z-base:    1; /* @kind other */
+  --z-sticky:  100; /* @kind other */
+  --z-overlay: 1000; /* @kind other */
+  --z-modal:   1100; /* @kind other */
+  --z-toast:   1200; /* @kind other */
+}
+
+
+
+
+  html, body { margin: 0; min-height: 100%; }
+  body { font-family: var(--font-body); background: linear-gradient(165deg, #0B3B5E 0%, #124a70 30%, #E4EFF7 30.2%); display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 28px 16px; box-sizing: border-box; }
+  * { box-sizing: border-box; }
+  .phone { width: 100%; max-width: 432px; background: var(--surface-page); border-radius: 30px; overflow: hidden; box-shadow: 0 30px 70px rgba(11,59,94,0.4); position: relative; min-height: 860px; display: flex; flex-direction: column; }
+  .screen { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  @keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+  @keyframes overlayfade { from { opacity: 0; } }
+  @keyframes sheetup { from { transform: translateY(100%); } }
+  @media (max-width: 480px) { body { padding: 0; } .phone { border-radius: 0; min-height: 100vh; box-shadow: none; } }
+
+
+/* ===== landing extras ===== */
+/* =====================================================================
+   ATSA Design System — global entry point
+   Consumers link this one file. It is an @import manifest only.
+   ===================================================================== */
+
+/* ATSA webfonts — self-hosted Montserrat (headings) + Open Sans (body)
+   Latin + Latin-Ext subsets only. Source: Google Fonts (open-licensed). */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================================
+   ATSA · Colour tokens
+   Water-led palette. Deep Navy anchors; Ocean, Aqua & Teal bring
+   movement. Neutrals let the brand colours breathe.
+   ===================================================================== */
+
+:root {
+  /* ---- Core brand (100%) ---- */
+  --atsa-navy:   #0B3B5E;  /* Deep Navy — primary, text, backgrounds        */
+  --atsa-ocean:  #1C6FB5;  /* Ocean — secondary, links, sub-headings        */
+  --atsa-aqua:   #36B6E0;  /* Aqua — accent, highlights, waves              */
+  --atsa-teal:   #16BFA6;  /* Teal — accent, energy, the 'A'                */
+
+  /* ---- Navy tints (mix toward white) ---- */
+  --atsa-navy-80: #3C627E;
+  --atsa-navy-60: #6D899E;
+  --atsa-navy-40: #9DB1BF;
+  --atsa-navy-20: #CED8DF;
+
+  /* ---- Ocean tints ---- */
+  --atsa-ocean-80: #498CC4;
+  --atsa-ocean-60: #77A9D3;
+  --atsa-ocean-40: #A4C5E1;
+  --atsa-ocean-20: #D2E2F0;
+
+  /* ---- Aqua tints ---- */
+  --atsa-aqua-80: #5EC5E6;
+  --atsa-aqua-60: #86D3EC;
+  --atsa-aqua-40: #AFE2F3;
+  --atsa-aqua-20: #D7F0F9;
+
+  /* ---- Teal tints ---- */
+  --atsa-teal-80: #45CCB8;
+  --atsa-teal-60: #73D9CA;
+  --atsa-teal-40: #A2E6DB;
+  --atsa-teal-20: #D0F2ED;
+
+  /* ---- Deeper navy (for dark surfaces / hovers; mix toward black) ---- */
+  --atsa-navy-deep: #072B45;
+  --atsa-navy-ink:  #052033;
+
+  /* ---- Neutrals ---- */
+  --atsa-sand:   #EDE6D8;  /* Warm background        */
+  --atsa-cloud:  #F2F8FC;  /* Light surface          */
+  --atsa-slate:  #5B6B7A;  /* Muted / secondary text */
+  --atsa-white:  #FFFFFF;
+
+  --atsa-cloud-deep: #E4EFF7; /* slightly deeper cloud for borders/fills */
+  --atsa-sand-deep:  #E1D6C2;
+  --atsa-slate-40:   #AEB7BF;
+  --atsa-slate-20:   #DDE2E6;
+
+  /* ---- Functional / status (harmonised, used sparingly) ---- */
+  --atsa-success:    #1F9D74;
+  --atsa-success-bg: #E4F4ED;
+  --atsa-warning:    #C9892B;
+  --atsa-warning-bg: #FAF0DC;
+  --atsa-danger:     #CF4B38;
+  --atsa-danger-bg:  #FBE9E5;
+  --atsa-info:       var(--atsa-ocean);
+  --atsa-info-bg:    var(--atsa-ocean-20);
+
+  /* =================================================================
+     Semantic aliases — reference these in components, not raw colours
+     ================================================================= */
+
+  /* Text */
+  --text-primary:   var(--atsa-navy);
+  --text-secondary: var(--atsa-slate);
+  --text-muted:     var(--atsa-navy-60);
+  --text-link:      var(--atsa-ocean);
+  --text-inverse:   var(--atsa-white);
+  --text-on-navy:   #DCEAF4;
+  --text-accent:    var(--atsa-teal);
+
+  /* Surfaces */
+  --surface-page:    var(--atsa-white);
+  --surface-card:    var(--atsa-white);
+  --surface-muted:   var(--atsa-cloud);
+  --surface-warm:    var(--atsa-sand);
+  --surface-navy:    var(--atsa-navy);
+  --surface-navy-deep: var(--atsa-navy-deep);
+  --surface-sunken:  var(--atsa-cloud);
+
+  /* Borders */
+  --border-subtle: #E6EDF2;
+  --border-default: #D6E0E8;
+  --border-strong:  var(--atsa-navy-40);
+  --border-navy:    rgba(255, 255, 255, 0.16);
+
+  /* Brand shortcuts */
+  --brand-primary: var(--atsa-navy);
+  --brand-ocean:   var(--atsa-ocean);
+  --brand-aqua:    var(--atsa-aqua);
+  --brand-accent:  var(--atsa-teal);
+
+  /* Focus ring */
+  --focus-ring: var(--atsa-aqua);
+}
+
+/* =====================================================================
+   ATSA · Typography tokens
+   Montserrat carries the brand voice (geometric, confident) and matches
+   the wordmark. Open Sans handles body copy — readable at length.
+   ===================================================================== */
+
+:root {
+  /* ---- Families ---- */
+  --font-heading: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body:    'Open Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:    'SFMono-Regular', ui-monospace, 'Menlo', 'Consolas', monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Type scale (1.250 major-third-ish, tuned) ---- */
+  --fs-display:  3.5rem;   /* 56px — hero display            */
+  --fs-h1:       2.5rem;   /* 40px                            */
+  --fs-h2:       1.875rem; /* 30px — section                  */
+  --fs-h3:       1.375rem; /* 22px — sub                      */
+  --fs-h4:       1.125rem; /* 18px                            */
+  --fs-lg:       1.125rem; /* 18px — lead body                */
+  --fs-body:     1rem;     /* 16px — default body             */
+  --fs-sm:       0.875rem; /* 14px                            */
+  --fs-xs:       0.75rem;  /* 12px — captions                 */
+  --fs-label:    0.6875rem;/* 11px — eyebrow / overline       */
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.1; /* @kind font */
+  --lh-snug:    1.25; /* @kind font */
+  --lh-heading: 1.2; /* @kind font */
+  --lh-body:    1.6; /* @kind font */
+  --lh-relaxed: 1.75; /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:   -0.02em; /* @kind font */
+  --ls-normal:  0; /* @kind font */
+  --ls-wide:    0.04em; /* @kind font */
+  --ls-label:   0.16em;   /* @kind font */
+}
+
+/* ---------------------------------------------------------------------
+   Base element defaults — opt-in via .atsa-prose or applied to body in
+   a consuming page. Components set their own type explicitly.
+   --------------------------------------------------------------------- */
+:where(body) {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.atsa-display,
+.atsa-h1, .atsa-h2, .atsa-h3, .atsa-h4 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+  margin: 0;
+  text-wrap: balance;
+}
+.atsa-display { font-size: var(--fs-display); font-weight: var(--fw-bold); }
+.atsa-h1 { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+.atsa-h2 { font-size: var(--fs-h2); font-weight: var(--fw-semibold); }
+.atsa-h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+.atsa-h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); letter-spacing: var(--ls-normal); }
+
+.atsa-lead {
+  font-family: var(--font-body);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--text-secondary);
+}
+
+/* Eyebrow / overline — letterspaced uppercase, echoes the wordmark caption */
+.atsa-eyebrow {
+  font-family: var(--font-heading);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-link);
+}
+
+/* =====================================================================
+   ATSA · Spacing, radius, shadow, borders, motion, layout
+   ===================================================================== */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-0:  0;
+  --space-1:  0.25rem;  /* 4  */
+  --space-2:  0.5rem;   /* 8  */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.5rem;   /* 24 */
+  --space-6:  2rem;     /* 32 */
+  --space-7:  2.5rem;   /* 40 */
+  --space-8:  3rem;     /* 48 */
+  --space-9:  4rem;     /* 64 */
+  --space-10: 5rem;     /* 80 */
+  --space-11: 6rem;     /* 96 */
+  --space-12: 8rem;     /* 128 */
+
+  /* ---- Radius ----
+     The brand icon uses a generous, friendly corner (120/512 ≈ 0.23).
+     Components echo that softness without going fully pill on cards. */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-2xl:  32px;
+  --radius-pill: 999px;
+  --radius-card: var(--radius-lg);
+
+  /* ---- Border widths ---- */
+  --border-thin:   1px;
+  --border-medium: 1.5px;
+  --border-thick:  2px;
+
+  /* ---- Shadows ----
+     Soft, cool-tinted (navy-based) — never hard black. Calm, not flashy. */
+  --shadow-xs:  0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-sm:  0 1px 3px rgba(11, 59, 94, 0.08), 0 1px 2px rgba(11, 59, 94, 0.06);
+  --shadow-md:  0 4px 12px rgba(11, 59, 94, 0.10), 0 2px 4px rgba(11, 59, 94, 0.06);
+  --shadow-lg:  0 12px 28px rgba(11, 59, 94, 0.12), 0 4px 10px rgba(11, 59, 94, 0.07);
+  --shadow-xl:  0 24px 48px rgba(11, 59, 94, 0.16), 0 8px 16px rgba(11, 59, 94, 0.08);
+  /* Coloured glow for accent / focus emphasis */
+  --shadow-aqua: 0 8px 24px rgba(54, 182, 224, 0.28);
+  --shadow-teal: 0 8px 24px rgba(22, 191, 166, 0.26);
+
+  /* Focus ring (paired with --focus-ring colour token) */
+  --ring-width: 3px; /* @kind other */
+  --ring-offset: 2px; /* @kind other */
+
+  /* ---- Motion ----
+     Calm, water-like easing. Quick on hover, gentle on entrance.
+     No bounces; no infinite decorative loops on content. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast:   120ms; /* @kind other */
+  --dur-base:   200ms; /* @kind other */
+  --dur-slow:   320ms; /* @kind other */
+  --dur-slower: 560ms; /* @kind other */
+
+  /* ---- Layout ---- */
+  --container-sm:  640px;
+  --container-md:  840px;
+  --container-lg:  1120px;
+  --container-xl:  1280px;
+  --container-page: 1200px;
+  --gutter: var(--space-5);
+
+  /* ---- Z-index ---- */
+  --z-base:    1; /* @kind other */
+  --z-sticky:  100; /* @kind other */
+  --z-overlay: 1000; /* @kind other */
+  --z-modal:   1100; /* @kind other */
+  --z-toast:   1200; /* @kind other */
+}
+
+
+
+
+  html, body { margin: 0; background: var(--surface-page); }
+  body { font-family: var(--font-body); color: var(--text-primary); }
+  * { box-sizing: border-box; }
+  a { color: inherit; }

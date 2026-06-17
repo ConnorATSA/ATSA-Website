@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATSA — Aquatic Training Solutions Australia</title>
+  <meta name="description" content="Aquatic Training Solutions Australia — professional development and consulting for the aquatics industry, home of The 1% Better Challenge." />
+  <link rel="icon" href="assets/logos/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Thin bar shown above the embedded Challenge app so users can get back to the site. */
+    .challenge-appbar {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: var(--atsa-navy-deep, #082b46); color: #fff; padding: 10px 16px;
+    }
+    .challenge-appbar span {
+      color: var(--atsa-aqua); font-size: 12px; font-family: var(--font-heading);
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .challenge-appbar a:hover { opacity: 1 !important; }
+  </style>
+  <!-- Logo asset paths for the design-system components (replaces the bundler's __resources). -->
+  <script>
+    window.__resources = {
+      logoPrimary: "assets/logos/atsa-logo-primary.svg",
+      logoReversed: "assets/logos/atsa-logo-reversed.svg",
+      logoIcon: "assets/logos/atsa-icon.svg"
+    };
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 1. React runtime (exact versions the designs were built against) -->
+  <script src="vendor/react.development.js"></script>
+  <script src="vendor/react-dom.development.js"></script>
+
+  <!-- 2. Design-system component library + plain-JS data/content/store (run immediately, define window.*) -->
+  <script src="lib/ds-bundle.js"></script>
+  <script src="data/atsa-data.js"></script>
+  <script src="challenge/content.js"></script>
+  <script src="challenge/store.js"></script>
+
+  <!-- 3. Babel transpiles the JSX sources below in the browser -->
+  <script src="vendor/babel.min.js"></script>
+
+  <!-- 4. JSX components (marketing) -->
+  <script type="text/babel" data-presets="react" src="marketing/pages.js"></script>
+  <script type="text/babel" data-presets="react" src="marketing/header.js"></script>
+  <script type="text/babel" data-presets="react" src="marketing/home.js"></script>
+  <script type="text/babel" data-presets="react" src="marketing/courses.js"></script>
+  <script type="text/babel" data-presets="react" src="marketing/course-detail.js"></script>
+
+  <!-- 4. JSX components (Challenge app screens) -->
+  <script type="text/babel" data-presets="react" src="challenge/onboarding.js"></script>
+  <script type="text/babel" data-presets="react" src="challenge/checkin.js"></script>
+  <script type="text/babel" data-presets="react" src="challenge/tracker.js"></script>
+  <script type="text/babel" data-presets="react" src="challenge/team.js"></script>
+  <script type="text/babel" data-presets="react" src="challenge/growth.js"></script>
+
+  <!-- 5. Section apps + top-level router -->
+  <script type="text/babel" data-presets="react" src="src/entry-marketing.js"></script>
+  <script type="text/babel" data-presets="react" src="src/entry-landing.js"></script>
+  <script type="text/babel" data-presets="react" src="src/entry-app.js"></script>
+  <script type="text/babel" data-presets="react" src="src/root.js"></script>
+</body>
+</html>

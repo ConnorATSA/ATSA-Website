@@ -1,0 +1,4 @@
+# Pre-launch — keep the site out of search results until it's ready.
+# Delete this file (or remove the Disallow) when you want it discoverable.
+User-agent: *
+Disallow: /
