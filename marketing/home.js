@@ -13,6 +13,7 @@ function Home({ onNavigate, onOpenCourse }) {
   const { Button, CourseCard, Stat, Card, Icon, Badge } = NS_HOME;
   const D = window.ATSA_DATA;
   const isMobile = window.useIsMobile();
+  const isNarrow = window.useIsMobile(560);
   const popular = D.courses.filter((c) => c.popular);
 
   const HERO_WAVE = (
@@ -58,14 +59,14 @@ function Home({ onNavigate, onOpenCourse }) {
 
       {/* CATEGORIES */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '8px 20px' : '8px 28px 8px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: isMobile ? 12 : 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isNarrow ? '1fr' : isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: isMobile ? 12 : 16 }}>
           {D.categories.map((c) => (
             <Card key={c.id} interactive padding="md" onClick={() => onNavigate('courses')} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 46, height: 46, borderRadius: 12, background: 'var(--atsa-aqua-20)', color: 'var(--atsa-ocean)', flexShrink: 0 }}>
                 <Icon name={c.icon} size={24} />
               </span>
-              <div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 16, color: 'var(--atsa-navy)' }}>{c.label}</div>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 16, color: 'var(--atsa-navy)', overflowWrap: 'anywhere' }}>{c.label}</div>
                 <div style={{ fontSize: 13, color: 'var(--atsa-slate)' }}>View workshops</div>
               </div>
             </Card>
