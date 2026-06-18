@@ -2,8 +2,9 @@
 // Demo team data (a real build pulls this from the user's org / team).
 window.CHALLENGE_TEAM = {
   name: 'Toowoomba Swim Co.',
+  // Demo teammates (a real build pulls these from the user's org / team).
+  // The "you" row is injected at render time from the signed-in account.
   members: [
-    { name: 'Mia Tran', days: 34, streak: 34, you: true },
     { name: 'Priya Nair', days: 41, streak: 12 },
     { name: 'Jack Doyle', days: 38, streak: 38 },
     { name: 'Sam Okafor', days: 30, streak: 6 },
@@ -16,21 +17,27 @@ window.CHALLENGE_TEAM = {
 function Team() {
   const { Card, Icon, Avatar, ProgressBar, Badge } = window.ATSADesignSystem_6b2905;
   const T = window.CHALLENGE_TEAM;
+  // Build the "you" row from the real signed-in account + live progress.
+  const S = window.ChallengeStore;
+  const u = (S && S.get().user) || {};
+  const you = { name: (u.name || '').trim() || 'You', days: S ? S.completedCount() : 0, streak: S ? S.streak() : 0, you: true };
+  const teamName = (u.school || '').trim() || T.name;
+  const members = [you, ...T.members];
   // Friendly, non-competitive: rank by participation/consistency, celebrate everyone.
-  const sorted = [...T.members].sort((a, b) => b.days - a.days);
-  const active = T.members.filter((m) => m.streak > 0).length;
-  const avg = Math.round(T.members.reduce((s, m) => s + m.days, 0) / T.members.length);
+  const sorted = [...members].sort((a, b) => b.days - a.days);
+  const active = members.filter((m) => m.streak > 0).length;
+  const avg = Math.round(members.reduce((s, m) => s + m.days, 0) / members.length);
   const medal = ['#C9892B', '#8C9BA6', '#B07B4F'];
 
   return (
     <div style={{ padding: '24px 22px 110px' }}>
       <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 26, color: 'var(--atsa-navy)', margin: '0 0 2px', letterSpacing: '-0.01em' }}>Your team</h2>
-      <p style={{ fontSize: 14.5, color: 'var(--atsa-slate)', margin: '0 0 18px' }}>{T.name} · moving forward together.</p>
+      <p style={{ fontSize: 14.5, color: 'var(--atsa-slate)', margin: '0 0 18px' }}>{teamName} · moving forward together.</p>
 
       {/* team stats */}
       <Card variant="navy" padding="md" style={{ marginBottom: 18 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, textAlign: 'center' }}>
-          {[[T.members.length, 'On the challenge'], [active, 'Active this week'], [avg, 'Avg. days done']].map(([v, l]) => (
+          {[[members.length, 'On the challenge'], [active, 'Active this week'], [avg, 'Avg. days done']].map(([v, l]) => (
             <div key={l}>
               <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 28, color: '#fff' }}>{v}</div>
               <div style={{ fontSize: 11.5, color: 'var(--text-on-navy)', lineHeight: 1.3 }}>{l}</div>
