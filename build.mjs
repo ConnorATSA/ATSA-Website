@@ -19,7 +19,7 @@ const JSX_FILES = [
 const COPY = [
   'styles.css', 'robots.txt',
   'lib/ds-bundle.js', 'data/atsa-data.js',
-  'challenge/content.js', 'challenge/store.js',
+  'challenge/content.js', 'challenge/store.js', 'challenge/supabase.js',
   'fonts', 'assets',
 ];
 

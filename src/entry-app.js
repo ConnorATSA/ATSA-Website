@@ -93,11 +93,12 @@
     );
   }
 
-  function Profile({ onReset }) {
+  function Profile({ onReset, onSignOut }) {
     const { Card, Icon, Button, Switch, Avatar } = NS;
     const store = window.ChallengeStore;
     const s = store.get();
     const u = s.user || {};
+    const remote = store.isRemote();
     const [, force] = React.useState(0);
     const rows = [
       ['award', 'Badges earned', String(s.badges.length)],
@@ -129,19 +130,66 @@
         </Card>
         <Card padding="md" style={{ marginBottom: 16, background: 'var(--atsa-cloud)' }}>
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--atsa-slate)', marginBottom: 8 }}>Your data</div>
-          <p style={{ fontSize: 13.5, color: 'var(--atsa-slate)', lineHeight: 1.5, margin: '0 0 12px' }}>You own your data. Export or delete it anytime — this is a demo, so these are placeholders.</p>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <Button variant="secondary" size="sm" iconLeft="download">Export</Button>
-            <Button variant="ghost" size="sm">Delete account</Button>
-          </div>
+          <p style={{ fontSize: 13.5, color: 'var(--atsa-slate)', lineHeight: 1.5, margin: 0 }}>{remote ? 'Your progress is saved to your account and syncs across your devices.' : 'This is a local demo — progress is saved only on this device.'}</p>
         </Card>
-        <Button variant="ghost" size="sm" fullWidth onClick={() => { if (confirm('Reset the demo? This clears your local progress.')) { onReset(); } }}>Reset demo</Button>
+        {remote
+          ? <Button variant="ghost" size="sm" fullWidth iconLeft="log-out" onClick={onSignOut}>Sign out</Button>
+          : <Button variant="ghost" size="sm" fullWidth onClick={() => { if (confirm('Reset the demo? This clears your local progress.')) { onReset(); } }}>Reset demo</Button>}
+      </div>
+    );
+  }
+
+  function Login({ onDemo }) {
+    const { Button, Icon, Input } = NS;
+    const [email, setEmail] = React.useState('');
+    const [status, setStatus] = React.useState('idle'); // idle | sending | sent | error
+    const [msg, setMsg] = React.useState('');
+
+    const submit = async (e) => {
+      e.preventDefault();
+      const addr = email.trim();
+      if (!addr || !window.SB) return;
+      setStatus('sending'); setMsg('');
+      const { error } = await window.SB.sendMagicLink(addr);
+      if (error) { setStatus('error'); setMsg(error.message || 'Could not send the link. Please try again.'); }
+      else setStatus('sent');
+    };
+
+    return (
+      <div style={{ height: '100%', background: 'var(--atsa-navy)', color: '#fff', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '40px 26px 26px', textAlign: 'center' }}>
+          <img src={window.__resources?.logoIcon || '../../assets/logos/atsa-icon.svg'} alt="" style={{ height: 46, marginBottom: 16 }} />
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 26, letterSpacing: '-0.02em', margin: '0 0 8px' }}>The 1% Better Challenge</h1>
+          <p style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.5 }}>Sign in to track your 100 days. We&rsquo;ll email a one-tap link — no password needed.</p>
+        </div>
+        <div style={{ background: '#fff', borderRadius: '24px 24px 0 0', flex: 1, padding: '26px 24px 40px' }}>
+          {status === 'sent' ? (
+            <div style={{ textAlign: 'center', paddingTop: 8 }}>
+              <span style={{ display: 'inline-flex', width: 60, height: 60, borderRadius: 999, background: 'var(--atsa-teal-20)', color: '#0E7D6C', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}><Icon name="mail" size={30} /></span>
+              <h2 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 21, color: 'var(--atsa-navy)', margin: '0 0 8px' }}>Check your email</h2>
+              <p style={{ fontSize: 14.5, color: 'var(--atsa-slate)', lineHeight: 1.55, margin: '0 0 18px' }}>We sent a sign-in link to <strong style={{ color: 'var(--atsa-navy)' }}>{email.trim()}</strong>. Open it on this device to log in.</p>
+              <Button variant="ghost" size="sm" onClick={() => setStatus('idle')}>Use a different email</Button>
+            </div>
+          ) : (
+            <form onSubmit={submit}>
+              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 18, color: 'var(--atsa-navy)', marginBottom: 14 }}>Sign in</div>
+              <Input label="Email" type="email" placeholder="you@swimschool.com.au" value={email} onChange={(e) => setEmail(e.target.value)} icon="mail" required />
+              {status === 'error' && <p style={{ color: '#C0392B', fontSize: 13.5, margin: '10px 0 0', lineHeight: 1.5 }}>{msg}</p>}
+              <div style={{ marginTop: 16 }}><Button type="submit" variant="accent" size="lg" fullWidth iconRight="arrow-right" disabled={status === 'sending'}>{status === 'sending' ? 'Sending…' : 'Email me a sign-in link'}</Button></div>
+              <p style={{ fontSize: 12.5, color: 'var(--atsa-slate)', lineHeight: 1.5, margin: '14px 0 0', textAlign: 'center' }}>Access is invite-only — use the email you were invited with.</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '22px 0' }}>
+                <div style={{ flex: 1, height: 1, background: 'var(--border-subtle)' }} /><span style={{ fontSize: 12, color: 'var(--atsa-navy-40)' }}>or</span><div style={{ flex: 1, height: 1, background: 'var(--border-subtle)' }} />
+              </div>
+              <Button variant="secondary" fullWidth onClick={onDemo}>Explore a demo (no account)</Button>
+            </form>
+          )}
+        </div>
       </div>
     );
   }
 
   function App() {
-    const [onboarded, setOnboarded] = React.useState(window.ChallengeStore.isOnboarded());
+    const [phase, setPhase] = React.useState('loading'); // loading | login | app
     const [tab, setTab] = React.useState('today');
     const [celebrate, setCelebrate] = React.useState(null);
     const [daySheet, setDaySheet] = React.useState(null);
@@ -152,12 +200,43 @@
     React.useEffect(() => window.ChallengeStore.subscribe(() => force((n) => n + 1)), []);
     React.useEffect(() => { if (screenRef.current) screenRef.current.scrollTop = 0; }, [tab]);
 
-    if (!onboarded) {
-      return (
-        <div className="phone">
-          <div className="screen"><window.Onboarding onDone={() => { setOnboarded(true); setTab('today'); }} /></div>
-        </div>
-      );
+    const enterRemote = React.useCallback(async () => {
+      try {
+        const profile = await window.SB.getProfile();
+        if (!profile) { setPhase('login'); return; }
+        window.ChallengeStore.setRemote(profile);
+        window.ChallengeStore.hydrate(await window.SB.loadAll());
+        setTab('today'); setPhase('app');
+      } catch (e) { setPhase('login'); }
+    }, []);
+
+    React.useEffect(() => {
+      if (!window.SB) { setPhase(window.ChallengeStore.isOnboarded() ? 'app' : 'login'); return; }
+      let sub;
+      (async () => {
+        const session = await window.SB.getSession();
+        if (session) await enterRemote(); else setPhase('login');
+        const res = window.SB.onAuth(async (event, sess) => {
+          if (event === 'SIGNED_IN' && sess) await enterRemote();
+          else if (event === 'SIGNED_OUT') setPhase('login');
+        });
+        sub = res && res.data && res.data.subscription;
+      })();
+      return () => { try { sub && sub.unsubscribe(); } catch (e) {} };
+    }, [enterRemote]);
+
+    const startDemo = () => {
+      window.ChallengeStore.signUp({ name: 'Mia Tran', email: 'mia@example.com', school: 'Toowoomba Swim Co.' });
+      window.ChallengeStore.seedDemo(34);
+      setTab('today'); setPhase('app');
+    };
+    const signOut = async () => { if (window.SB) await window.SB.signOut(); window.ChallengeStore.signOutLocal(); setPhase('login'); };
+
+    if (phase === 'loading') {
+      return (<div className="phone"><div className="screen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--atsa-navy-40)' }}><NS.Icon name="droplet" size={30} /></div></div>);
+    }
+    if (phase === 'login') {
+      return (<div className="phone"><div className="screen"><Login onDemo={startDemo} /></div></div>);
     }
 
     return (
@@ -167,7 +246,7 @@
           {tab === 'tracker' && <window.Tracker onOpenDay={(d) => setDaySheet(d)} />}
           {tab === 'team' && <window.Team />}
           {tab === 'growth' && <window.Growth onWriteReflection={(n) => setReflectN(n)} />}
-          {tab === 'profile' && <Profile onReset={() => { window.ChallengeStore.reset(); setOnboarded(false); }} />}
+          {tab === 'profile' && <Profile onReset={() => { window.ChallengeStore.reset(); setPhase('login'); }} onSignOut={signOut} />}
         </div>
         <TabBar tab={tab} setTab={setTab} />
         {celebrate && <Celebration data={celebrate} onClose={() => setCelebrate(null)} />}

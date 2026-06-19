@@ -27,6 +27,9 @@
       logoReversed: "assets/logos/atsa-logo-reversed.svg",
       logoIcon: "assets/logos/atsa-icon.svg"
     };
+    // Supabase backend for the 1% Better Challenge (publishable key — safe in the browser).
+    window.SUPABASE_URL = "https://txvznrbxgehluqgkgovu.supabase.co";
+    window.SUPABASE_KEY = "sb_publishable_dOPAvFRM8Cmo6ccZwiyOfg_0atsjrMn";
   </script>
 </head>
 <body>
@@ -41,6 +44,10 @@
   <script src="data/atsa-data.js"></script>
   <script src="challenge/content.js"></script>
   <script src="challenge/store.js"></script>
+
+  <!-- Supabase backend (real accounts for the Challenge) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="challenge/supabase.js"></script>
 
   <!-- 3. Babel transpiles the JSX sources below in the browser -->
   <script src="vendor/babel.min.js"></script>

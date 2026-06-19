@@ -37,6 +37,7 @@
   function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
 
   let state = load();
+  let remote = false;            // true once signed in to a real Supabase account
   const listeners = new Set();
   const emit = () => { save(state); listeners.forEach((fn) => fn(state)); };
 
@@ -123,6 +124,33 @@
       emit();
     },
 
+    // ---- Remote (real account) wiring ----------------------------------
+    isRemote: () => remote,
+    setRemote(profile) {
+      remote = true;
+      state.user = {
+        name: profile.full_name || (profile.email || '').split('@')[0],
+        email: profile.email,
+        school: (profile.schools && profile.schools.name) || null,
+        schoolId: profile.school_id || null,
+        isAdmin: !!profile.is_admin,
+      };
+      if (profile.start_date) state.startDate = profile.start_date;
+      emit();
+    },
+    hydrate({ done, reflections }) {
+      state.done = done || {};
+      state.reflections = reflections || {};
+      awardMaybe();
+      emit();
+    },
+    signOutLocal() {
+      remote = false;
+      state = { ...DEFAULT, done: {}, reflections: {}, badges: [] };
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      emit();
+    },
+
     updateSettings(patch) { state.settings = { ...state.settings, ...patch }; emit(); },
 
     // mark a specific day done (defaults to the current day)
@@ -138,15 +166,17 @@
       state.lastCheckIn = todayStr();
       const fresh = awardMaybe();
       emit();
+      if (remote && window.SB) window.SB.checkIn(d);
       return { day: d, fresh };
     },
 
-    undoCheckIn(dayNumber) { delete state.done[dayNumber]; emit(); },
+    undoCheckIn(dayNumber) { delete state.done[dayNumber]; emit(); if (remote && window.SB) window.SB.undoCheckIn(dayNumber); },
 
     saveReflection(themeN, text) {
       state.reflections[themeN] = { text, date: todayStr() };
       awardMaybe();
       emit();
+      if (remote && window.SB) window.SB.saveReflection(themeN, text);
     },
 
     // demo helper: jump progress forward to seed a lively prototype
