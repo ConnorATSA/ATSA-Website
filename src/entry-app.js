@@ -151,7 +151,18 @@
       if (!addr || !window.SB) return;
       setStatus('sending'); setMsg('');
       const { error } = await window.SB.sendMagicLink(addr);
-      if (error) { setStatus('error'); setMsg(error.message || 'Could not send the link. Please try again.'); }
+      if (error) {
+        // Supabase sometimes returns an empty/garbled error body (e.g. when the
+        // invite-only DB trigger rejects a sign-in), which used to render as "{}".
+        let m = (error && typeof error.message === 'string') ? error.message.trim() : '';
+        if (!m || m === '{}' || m === '[object Object]') m = '';
+        if (/rate|too many|429/i.test(m) || error.status === 429) {
+          m = 'Too many attempts — please wait a minute and try again.';
+        } else if (!m || error.status === 403 || error.status === 422 || error.status >= 500) {
+          m = 'We couldn’t send a sign-in link to that address. Access is invite-only — please use the email you were invited with, or contact your administrator.';
+        }
+        setStatus('error'); setMsg(m);
+      }
       else setStatus('sent');
     };
 
