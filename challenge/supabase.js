@@ -64,6 +64,28 @@
       (prog || []).forEach((row) => { (byUser[row.user_id] = byUser[row.user_id] || []).push(row.completed_at); });
       return people.map((p) => ({ id: p.id, name: p.full_name || 'Teacher', days: (byUser[p.id] || []).length, dates: byUser[p.id] || [] }));
     },
+
+    // ---- Admin: invite management (RLS gates these to admins via is_admin()) ----
+    async listSchools() {
+      const { data } = await client.from('schools').select('id, name').order('name');
+      return data || [];
+    },
+    async listInvites() {
+      return client.from('invites')
+        .select('id, email, full_name, is_admin, accepted, school_id')
+        .order('accepted', { ascending: true }).order('email', { ascending: true });
+    },
+    async inviteUser({ email, full_name, school_id, is_admin }) {
+      return client.from('invites').insert({
+        email: (email || '').trim().toLowerCase(),
+        full_name: (full_name || '').trim() || null,
+        school_id: school_id || null,
+        is_admin: !!is_admin,
+      });
+    },
+    async deleteInvite(id) {
+      return client.from('invites').delete().eq('id', id);
+    },
   };
 
   // After a magic-link return (URL carries ?code=...), drop the user into the app.
