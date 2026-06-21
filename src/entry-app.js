@@ -93,7 +93,7 @@
     );
   }
 
-  function Profile({ onReset, onSignOut }) {
+  function Profile({ onReset, onSignOut, onAdmin }) {
     const { Card, Icon, Button, Switch, Avatar } = NS;
     const store = window.ChallengeStore;
     const s = store.get();
@@ -128,6 +128,15 @@
             <Switch label="Share progress with my team" defaultChecked={s.settings.shareWithTeam} onChange={() => {}} />
           </div>
         </Card>
+        {u.isAdmin && (
+          <Card padding="none" style={{ marginBottom: 16 }}>
+            <button onClick={onAdmin} style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 13, padding: '14px 16px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+              <span style={{ display: 'inline-flex', width: 34, height: 34, borderRadius: 9, background: 'var(--atsa-teal-20)', color: '#0E7D6C', alignItems: 'center', justifyContent: 'center' }}><Icon name="shield-check" size={18} /></span>
+              <span style={{ flex: 1, fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 15, color: 'var(--atsa-navy)' }}>Invite teachers</span>
+              <Icon name="chevron-right" size={18} style={{ color: 'var(--atsa-navy-40)' }} />
+            </button>
+          </Card>
+        )}
         <Card padding="md" style={{ marginBottom: 16, background: 'var(--atsa-cloud)' }}>
           <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--atsa-slate)', marginBottom: 8 }}>Your data</div>
           <p style={{ fontSize: 13.5, color: 'var(--atsa-slate)', lineHeight: 1.5, margin: 0 }}>{remote ? 'Your progress is saved to your account and syncs across your devices.' : 'This is a local demo — progress is saved only on this device.'}</p>
@@ -199,12 +208,107 @@
     );
   }
 
+  function AdminInvites({ onClose }) {
+    const { Button, Icon, Input, Select, Switch, Card } = NS;
+    const [schools, setSchools] = React.useState([]);
+    const [invites, setInvites] = React.useState([]);
+    const [email, setEmail] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [schoolId, setSchoolId] = React.useState('');
+    const [isAdmin, setIsAdmin] = React.useState(false);
+    const [sendLink, setSendLink] = React.useState(true);
+    const [busy, setBusy] = React.useState(false);
+    const [msg, setMsg] = React.useState(null); // { type: 'ok' | 'err', text }
+
+    const refresh = React.useCallback(async () => {
+      const { data } = await window.SB.listInvites();
+      setInvites(data || []);
+    }, []);
+
+    React.useEffect(() => {
+      (async () => { setSchools(await window.SB.listSchools()); await refresh(); })();
+    }, [refresh]);
+
+    const submit = async (e) => {
+      e.preventDefault();
+      const addr = email.trim().toLowerCase();
+      if (!addr) return;
+      setBusy(true); setMsg(null);
+      const { error } = await window.SB.inviteUser({ email: addr, full_name: name, school_id: schoolId || null, is_admin: isAdmin });
+      if (error) {
+        const dup = /duplicate|unique/i.test(error.message || '');
+        setMsg({ type: 'err', text: dup ? 'That email is already on the invite list.' : (error.message || 'Could not add the invite.') });
+        setBusy(false); return;
+      }
+      let extra = '';
+      if (sendLink) {
+        const { error: sendErr } = await window.SB.sendMagicLink(addr);
+        extra = sendErr ? ' (invite saved, but the sign-in email couldn’t be sent)' : ' and emailed them a sign-in link';
+      }
+      setMsg({ type: 'ok', text: `Invited ${addr}${extra}.` });
+      setEmail(''); setName(''); setSchoolId(''); setIsAdmin(false);
+      setBusy(false); refresh();
+    };
+
+    const remove = async (inv) => {
+      if (!confirm(`Remove the invite for ${inv.email}? New sign-ins will be blocked — anyone who has already joined keeps access.`)) return;
+      await window.SB.deleteInvite(inv.id); refresh();
+    };
+
+    const schoolOptions = [{ value: '', label: 'No school' }].concat(schools.map((s) => ({ value: s.id, label: s.name })));
+
+    return (
+      <div style={{ position: 'absolute', inset: 0, background: '#fff', zIndex: 70, display: 'flex', flexDirection: 'column', animation: 'sheetup .25s cubic-bezier(0.16,1,0.3,1)' }}>
+        <div style={{ background: 'var(--atsa-navy)', color: '#fff', padding: '18px 18px', display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+          <button onClick={onClose} aria-label="Back" style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', display: 'inline-flex', padding: 0 }}><Icon name="chevron-left" size={24} /></button>
+          <div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 18 }}>Invite teachers</div>
+            <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.7)' }}>Add people to the invite-only challenge</div>
+          </div>
+        </div>
+        <div style={{ flex: 1, overflowY: 'auto', padding: 20 }}>
+          <form onSubmit={submit}>
+            <Input label="Email" type="email" placeholder="teacher@swimschool.com.au" value={email} onChange={(e) => setEmail(e.target.value)} icon="mail" required />
+            <div style={{ height: 12 }} />
+            <Input label="Full name" placeholder="Jane Smith" value={name} onChange={(e) => setName(e.target.value)} icon="user" />
+            <div style={{ height: 12 }} />
+            <Select label="School" options={schoolOptions} value={schoolId} onChange={(e) => setSchoolId(e.target.value)} />
+            <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <Switch label="Make this person an admin" checked={isAdmin} onChange={(e) => setIsAdmin(e.target.checked)} />
+              <Switch label="Email them a sign-in link now" checked={sendLink} onChange={(e) => setSendLink(e.target.checked)} />
+            </div>
+            {msg && <p style={{ fontSize: 13.5, lineHeight: 1.5, margin: '12px 0 0', color: msg.type === 'ok' ? '#0E7D6C' : '#C0392B' }}>{msg.text}</p>}
+            <div style={{ marginTop: 16 }}><Button type="submit" variant="accent" size="lg" fullWidth iconRight="arrow-right" disabled={busy}>{busy ? 'Inviting…' : 'Send invite'}</Button></div>
+          </form>
+          <div style={{ marginTop: 26 }}>
+            <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--atsa-slate)', marginBottom: 10 }}>Invited ({invites.length})</div>
+            <Card padding="none">
+              {invites.length === 0 && <div style={{ padding: '18px 16px', fontSize: 14, color: 'var(--atsa-slate)' }}>No invites yet.</div>}
+              {invites.map((inv, i) => (
+                <div key={inv.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '13px 16px', borderBottom: i < invites.length - 1 ? '1px solid var(--border-subtle)' : 'none' }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 14.5, color: 'var(--atsa-navy)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{inv.full_name || inv.email}</div>
+                    <div style={{ fontSize: 12.5, color: 'var(--atsa-slate)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{inv.email}</div>
+                  </div>
+                  {inv.is_admin && <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#0E7D6C', background: 'var(--atsa-teal-20)', borderRadius: 6, padding: '3px 7px' }}>Admin</span>}
+                  <span style={{ fontSize: 11, fontWeight: 600, color: inv.accepted ? '#0E7D6C' : 'var(--atsa-navy-40)' }}>{inv.accepted ? 'Joined' : 'Pending'}</span>
+                  <button onClick={() => remove(inv)} aria-label="Remove invite" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--atsa-navy-40)', display: 'inline-flex', padding: 4 }}><Icon name="x" size={17} /></button>
+                </div>
+              ))}
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   function App() {
     const [phase, setPhase] = React.useState('loading'); // loading | login | app
     const [tab, setTab] = React.useState('today');
     const [celebrate, setCelebrate] = React.useState(null);
     const [daySheet, setDaySheet] = React.useState(null);
     const [reflectN, setReflectN] = React.useState(null);
+    const [admin, setAdmin] = React.useState(false);
     const [, force] = React.useState(0);
     const screenRef = React.useRef(null);
 
@@ -257,12 +361,13 @@
           {tab === 'tracker' && <window.Tracker onOpenDay={(d) => setDaySheet(d)} />}
           {tab === 'team' && <window.Team />}
           {tab === 'growth' && <window.Growth onWriteReflection={(n) => setReflectN(n)} />}
-          {tab === 'profile' && <Profile onReset={() => { window.ChallengeStore.reset(); setPhase('login'); }} onSignOut={signOut} />}
+          {tab === 'profile' && <Profile onReset={() => { window.ChallengeStore.reset(); setPhase('login'); }} onSignOut={signOut} onAdmin={() => setAdmin(true)} />}
         </div>
         <TabBar tab={tab} setTab={setTab} />
         {celebrate && <Celebration data={celebrate} onClose={() => setCelebrate(null)} />}
         {daySheet && <DaySheet day={daySheet} onClose={() => setDaySheet(null)} />}
         {reflectN && <ReflectionSheet themeN={reflectN} onClose={() => setReflectN(null)} />}
+        {admin && <AdminInvites onClose={() => setAdmin(false)} />}
       </div>
     );
   }
