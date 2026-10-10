@@ -13,6 +13,7 @@
   from = "/case-studies"
   to = "/case-studies/index.html"
   status = 200
+  force = true   # serve directly; otherwise Netlify 301s to /case-studies/
 
 # Hash-based SPA routing: every path resolves to index.html.
 [[redirects]]
