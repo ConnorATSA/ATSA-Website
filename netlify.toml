@@ -7,6 +7,14 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Static case-studies page (QR code on conference slides points here).
+# Must come before the SPA catch-all so /case-studies isn't swallowed by it.
+[[redirects]]
+  from = "/case-studies"
+  to = "/case-studies/index.html"
+  status = 200
+  force = true   # serve directly; otherwise Netlify 301s to /case-studies/
+
 # Hash-based SPA routing: every path resolves to index.html.
 [[redirects]]
   from = "/*"
@@ -33,3 +41,14 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# Case studies name real children: keep the page and PDFs out of search engines.
+[[headers]]
+  for = "/case-studies"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/case-studies/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

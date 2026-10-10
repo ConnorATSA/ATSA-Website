@@ -21,6 +21,7 @@ const COPY = [
   'lib/ds-bundle.js', 'data/atsa-data.js',
   'challenge/content.js', 'challenge/store.js', 'challenge/supabase.js',
   'fonts', 'assets',
+  'case-studies', // static, public QR-code download page + PDFs (no React)
 ];
 
 // 1. clean
